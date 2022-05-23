@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ConciergeWebApplication.Models.VisitingApplication>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Заяви на відвідування</h1>
+
+<p>
+    <a asp-action="Create">Додати заяву</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visitor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visitor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apartment.ApartmentId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ApplicationId">Правки</a> |
+                <a asp-action="Details" asp-route-id="@item.ApplicationId">Деталі</a> |
+                <a asp-action="Delete" asp-route-id="@item.ApplicationId">Видалити</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

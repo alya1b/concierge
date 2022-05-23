@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ConciergeWebApplication.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Авто</h1>
+
+<p>
+    <a asp-action="Create">Додати нове авто</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Number">Редагувати</a> |
+                <a asp-action="Details" asp-route-id="@item.Number">Деталі</a> |
+                <a asp-action="Delete" asp-route-id="@item.Number">Видалити</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="container"> 
+<div id="chart2"></div>
+ </div>
+ @section scripts{ 
+<script type "text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script> 
+google.charts.load('current', { 'packages': ['corechart'] }); 
+google.charts.setOnLoadCallback(drawChart); 
+function drawChart() 
+{ $.get('/api/Chart/JsonData1', function(JsonData1) { 
+data = google.visualization.arrayToDataTable(JsonData1, false);
+ var option = { 
+title: "Паркінг на данний момент",
+ width: 500,
+ height: 400 
+}; 
+chart = new google.visualization.PieChart(document.getElementById('chart2'));
+ chart.draw(data, option); }) } 
+</script> 
+}
+

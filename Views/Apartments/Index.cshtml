@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ConciergeWebApplication.Models.Apartment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Квартири</h1>
+
+<p>
+    <a asp-action="Create">Створити кваритиру</a>
+</p>
+<table class="table">
+    <thead>
+        <tr> 
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Porch)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>    
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Porch)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ApartmentId">Редагувати</a> |
+                <a asp-action="Details" asp-route-id="@item.ApartmentId">Деталі</a> |
+                <a asp-action="Delete" asp-route-id="@item.ApartmentId">Видалити</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
